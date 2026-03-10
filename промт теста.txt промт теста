@@ -1,0 +1,442 @@
+# Prompt for Building an Interactive Binary Marketing Training Module
+
+Create an **interactive learning module with a test about binary marketing**.  
+The module should work for **desktop and mobile screens** and have a **modern, clean learning-app interface**.
+
+The goal is **not only to test knowledge but to help the user understand the binary system in a simple, interactive, game-like way**.
+
+---
+
+# General Module Logic
+
+The first screen should contain a button:
+
+**"Start Test"**
+
+When the user clicks it, they must complete **5 tasks sequentially**.
+
+Rules:
+
+- 1 screen = 1 task
+- After answering, a character named **Dendy** reacts
+- If the answer is **correct**, the user moves to the next task
+- If the answer is **incorrect**, the same task opens again
+- The correct answer **must never be revealed**
+- Dendy **must not explain the solution**
+- Dendy only **encourages the user to try again**
+
+---
+
+# Style of Dendy Messages
+
+Dendy messages must be:
+
+- friendly
+- playful
+- encouraging
+- slightly humorous
+- short
+- non-academic
+
+Dendy **must NOT explain the correct answer**.
+
+Dendy should:
+
+- motivate the user
+- keep the tone light
+- encourage another attempt
+
+---
+
+# Important Technical Rule
+
+In all tasks with answer options:
+
+- answer order must be **randomized every time**
+- answers must **visually change order**
+- users must **not memorize answer positions**
+- correct answers must be determined **by text content, not index**
+
+Randomization must apply to:
+
+- Task 1
+- Task 2
+- Task 3
+
+Tasks 4 and 5 do not need answer randomization because they use visual interaction.
+
+---
+
+# Task 1
+
+## Question
+
+What must be done to activate the binary bonus?
+
+Select one correct answer.
+
+## Answer options
+
+- Register 2 partners
+- Register 3 partners: 2 in the right branch and 1 in the left branch, each with at least the Partner package
+- Buy the VIP package
+- Register 5 clients
+
+## Correct answer
+
+Register 3 partners: 2 in the right branch and 1 in the left branch, each with at least the Partner package.
+
+## If correct
+
+Dendy:  
+Great 🙂  
+Let's move on.
+
+## If incorrect
+
+Dendy:  
+Attention 🙂  
+Try to remember how the binary bonus is activated.
+
+---
+
+# Task 2
+
+Type: multiple choice
+
+Randomly display **one of two question variants**.
+
+---
+
+## Variant A
+
+### Question
+
+What percentage of the binary bonus do the **Partner and Business packages** receive?
+
+### Answers
+
+- 4%
+- 6%
+- 8%
+- 10%
+
+Correct answer: **6%**
+
+### Correct reaction
+
+Dendy:  
+Correct 🙂  
+Nice work.
+
+### Incorrect reaction
+
+Dendy:  
+Try again 🙂  
+Think about what was explained in the material.
+
+---
+
+## Variant B
+
+### Question
+
+What percentage of the binary bonus do the **Elite and VIP packages** receive?
+
+### Answers
+
+- 4%
+- 6%
+- 8%
+- 10%
+
+Correct answer: **8%**
+
+### Correct reaction
+
+Dendy:  
+Nice 🙂  
+Let's continue.
+
+### Incorrect reaction
+
+Dendy:  
+Almost 🙂  
+Look carefully and try again.
+
+Answer order must also be randomized.
+
+---
+
+# Task 3
+
+Type: multiple choice
+
+Randomly show one of four questions.
+
+### Possible questions
+
+What is the binary payout limit per reporting period if you have the **Partner package**?
+
+Correct answer: **500 PV**
+
+What is the binary payout limit per reporting period if you have the **Business package**?
+
+Correct answer: **1000 PV**
+
+What is the binary payout limit per reporting period if you have the **Elite package**?
+
+Correct answer: **2000 PV**
+
+What is the binary payout limit per reporting period if you have the **VIP package**?
+
+Correct answer: **8000 PV**
+
+### Answer options
+
+- 500 PV
+- 1000 PV
+- 2000 PV
+- 8000 PV
+
+Order must be randomized.
+
+### Correct reaction
+
+Dendy:  
+You are paying attention to the rules 🙂
+
+### Incorrect reaction
+
+Dendy:  
+Let's try again 🙂  
+Take another look at the package limits.
+
+---
+
+# Task 4
+
+Type: visual selection
+
+### Question
+
+Choose the image that shows the correct placement of your personally invited partners to activate the binary bonus.
+
+Display **4 square cards with mini binary tree diagrams**.
+
+Style:
+
+- minimalistic
+- modern UI
+- circular partner icons
+- dotted lines from the main node
+- labels: "Left Branch" and "Right Branch"
+- top node labeled **"You"**
+
+---
+
+## Image options
+
+### Image 1
+
+Left branch: 1 partner  
+Right branch: 1 partner
+
+### Image 2
+
+Left branch: 2 partners  
+Right branch: 1 partner
+
+### Image 3 (Correct)
+
+Left branch: 1 partner  
+Right branch: 2 partners
+
+### Image 4
+
+Left branch: 0 partners  
+Right branch: 3 partners
+
+---
+
+### Correct reaction
+
+Dendy:  
+Correct 🙂  
+The structure looks good.
+
+### Incorrect reaction
+
+Dendy:  
+Almost 🙂  
+Look again at how partners should be placed.
+
+---
+
+# Task 5
+
+Type: **drag and drop**
+
+### Question
+
+Distribute the volumes across the branches so that the binary bonus equals the required value.
+
+---
+
+## Visual structure
+
+Display a binary tree:
+
+Top node: **You**
+
+Two branches:
+
+Left Branch  
+Right Branch
+
+Each branch has an empty slot.
+
+Below the tree there are **cards with numbers that can be dragged**.
+
+---
+
+## Example target
+
+"Build the branches so the binary bonus equals **500 PV**."
+
+---
+
+## Example numbers
+
+- 300 PV
+- 500 PV
+- 700 PV
+- 900 PV
+- 1200 PV
+
+---
+
+## Logic
+
+Binary bonus is calculated by the **smaller branch**.
+
+Correct combinations when the target is **500 PV**:
+
+- 500 & 500
+- 500 & 700
+- 500 & 900
+- 500 & 1200
+
+Incorrect combinations:
+
+- 500 & 300
+- 300 & 500
+
+---
+
+## Randomization
+
+The target value must change randomly.
+
+Possible targets:
+
+- 300 PV
+- 500 PV
+- 900 PV
+
+The number pool must include:
+
+- the target number
+- numbers lower than the target
+- numbers equal or greater than the target
+
+---
+
+## Validation logic
+
+Correct if:
+
+left branch == target AND right branch >= target
+
+OR
+
+right branch == target AND left branch >= target
+
+---
+
+## Correct reaction
+
+Dendy:  
+Great 🙂  
+Those numbers fit perfectly.
+
+Let's continue.
+
+---
+
+## Incorrect reaction
+
+Dendy:  
+Almost there 🙂  
+Take another look and try again.
+
+---
+
+# Final Screen
+
+After completing all 5 tasks show a completion screen.
+
+Text:
+
+**Great job!  
+You have completed the Binary Marketing Test.**
+
+Buttons:
+
+- Retry Test
+- Back to Training
+
+---
+
+# Technical Requirements
+
+Use a modern frontend architecture.
+
+Preferred stack:
+
+- React
+- TypeScript
+- modular component structure
+
+Include:
+
+- progress indicator
+- randomized answers
+- drag and drop interaction
+- reusable components
+- responsive design
+- clean UI
+- smooth transitions
+
+---
+
+# Visual Design
+
+The interface should be:
+
+- modern
+- minimal
+- educational
+- clean
+- comfortable for reading
+- mobile friendly
+
+Use:
+
+- rounded cards
+- soft shadows
+- clear typography
+- calm color palette
+- simple animations
+
+The final result should feel like a **professional interactive learning application**.

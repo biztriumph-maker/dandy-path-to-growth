@@ -1,0 +1,244 @@
+# Interactive Marketing Training – Task Specification
+
+Create an interactive training module with 5 tasks about the marketing system.  
+The interface includes a character called **Dandy** who reacts to user actions.
+
+General rules:
+- All answer options must be **randomized** where specified.
+- The UI must be interactive and simple.
+- Tasks should be understandable for a **high school level user**.
+- Feedback should be **friendly and encouraging**.
+- The character **Dandy** speaks in a supportive, light, slightly humorous tone.
+
+---
+
+# Task 1 – Find the Odd Element
+
+## Instruction
+Find the odd element.
+
+## Data Sources
+
+### Status List
+Randomly select **3 items** from this list:
+
+- Manager
+- Mentor
+- Master
+- Advisor
+- Director
+- Super Director
+- Consul
+- Ambassador
+- President
+
+### Package List
+Randomly select **1 item** from this list:
+
+- Client
+- Partner
+- Business
+- Elite
+- VIP
+
+## Task Generation Logic
+1. Select 3 random statuses.
+2. Select 1 random package.
+3. Combine them into 4 answer options.
+4. Shuffle the options randomly.
+
+## Correct Answer
+The element that belongs to the **package list**.
+
+## Dandy Response
+
+Correct answer:
+"Great! You are already starting to understand the reward system."
+
+Incorrect answer:
+"Almost. Try again."
+
+---
+
+# Task 2 – First Career Step
+
+## Scenario
+You registered in the company and want to start building your career.
+
+Your team produced **1000 PV in the smaller leg of the binary structure**.
+
+## Question
+What status did you receive?
+
+## Answer Options
+- Mentor
+- Manager
+- Master
+- Advisor
+
+Options must be **randomly shuffled**.
+
+## Correct Answer
+Manager
+
+## Dandy Response
+
+Correct:
+"Excellent! The first step in your career is done. Keep going!"
+
+Incorrect:
+"Not quite. Take another look and try again."
+
+---
+
+# Task 3 – Confirming Leadership Status
+
+## Scenario
+You reached a leadership career level.
+
+Leadership statuses include:
+
+- Super Director
+- Consul
+- Ambassador
+- President
+
+To secure the status you must confirm the required volume.
+
+## Question
+Within what period must the status be confirmed?
+
+## Answer Options
+- 1 month
+- 2 months
+- 3 months
+- 6 months
+
+Options must be **randomized**.
+
+## Correct Answer
+3 months
+
+## Dandy Response
+
+Correct:
+"Excellent! Now you understand how leadership statuses are confirmed."
+
+Incorrect:
+"Not quite. Think again."
+
+---
+
+# Task 4 – Match Status and Bonus
+
+## Instruction
+Match each status with the correct bonus.
+
+## Status Cards (shuffle order)
+- Mentor
+- Master
+- Advisor
+
+## Bonus Cards (shuffle order)
+- 100 PV
+- 300 PV
+- 800 PV
+
+## Correct Matches
+Mentor → 100 PV  
+Master → 300 PV  
+Advisor → 800 PV
+
+## Interaction
+Use **drag & drop** to connect status cards to bonus cards.
+
+Connections can be correct or incorrect.
+
+## Visual Interaction
+When a card is dragged near a target:
+- highlight the target area
+- allow the connection to be placed
+
+Do not show correctness until the user presses **Check**.
+
+## Check Logic
+After pressing **Check**:
+
+Correct matches:
+- remain in place
+
+Incorrect matches:
+- highlighted red
+- user must correct them
+
+## Dandy Response
+
+Correct:
+"Great! You are starting to understand how the bonus system works."
+
+Incorrect:
+"There is a mistake. Think again."
+
+---
+
+# Task 5 – Build the Career Ladder
+
+## Instruction
+Arrange the career statuses in the correct order of progression.
+
+## Status Cards (shuffle on load)
+
+- Manager
+- Mentor
+- Master
+- Advisor
+- Director
+- Super Director
+- Consul
+- Ambassador
+- President
+
+## Interaction
+Users must arrange the cards using **drag & drop**.
+
+## Correct Order
+
+1. Manager
+2. Mentor
+3. Master
+4. Advisor
+5. Director
+6. Super Director
+7. Consul
+8. Ambassador
+9. President
+
+## Check Logic
+User presses **Check**.
+
+Correct cards:
+- highlighted **green**
+- locked in position
+
+Incorrect cards:
+- highlighted **red**
+- removed from position
+- returned to selection area
+
+User can try again.
+
+## Reset Behavior
+If the user reloads or revisits the page:
+- all cards shuffle again
+- progress resets
+
+## Dandy Responses
+
+Correct:
+"Excellent! The full career ladder is complete. Now you see the entire path of growth."
+
+If there are mistakes, randomly choose one message:
+
+1. "Hmm… not quite. Let’s try again!"
+2. "Almost there! I’m sure you’ll get it this time."
+3. "Oops… the ladder tilted a bit. Let’s fix it!"

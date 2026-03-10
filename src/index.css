@@ -1,0 +1,202 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 260 30% 97%;
+    --foreground: 260 25% 18%;
+
+    --card: 260 30% 99%;
+    --card-foreground: 260 25% 18%;
+
+    --popover: 260 30% 99%;
+    --popover-foreground: 260 25% 18%;
+
+    --primary: 265 60% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 260 35% 92%;
+    --secondary-foreground: 260 25% 25%;
+
+    --muted: 260 20% 94%;
+    --muted-foreground: 260 10% 50%;
+
+    --accent: 35 90% 58%;
+    --accent-foreground: 35 90% 15%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 260 20% 90%;
+    --input: 260 20% 90%;
+    --ring: 265 60% 55%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 260 30% 97%;
+    --sidebar-foreground: 260 25% 18%;
+    --sidebar-primary: 265 60% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 260 35% 92%;
+    --sidebar-accent-foreground: 260 25% 25%;
+    --sidebar-border: 260 20% 90%;
+    --sidebar-ring: 265 60% 55%;
+
+    /* Custom tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(265 60% 55%), hsl(280 65% 65%));
+    --gradient-hero: linear-gradient(180deg, hsl(260 40% 96%), hsl(265 35% 92%));
+    --gradient-card: linear-gradient(145deg, hsl(260 30% 99%), hsl(265 30% 95%));
+    --gradient-glow: radial-gradient(circle, hsl(265 70% 75% / 0.3), transparent 70%);
+    --shadow-soft: 0 4px 20px hsl(265 60% 55% / 0.1);
+    --shadow-card: 0 8px 30px hsl(265 60% 55% / 0.08);
+    --shadow-button: 0 4px 15px hsl(265 60% 55% / 0.25);
+
+    /* Dandy colors */
+    --dandy-body: 265 55% 60%;
+    --dandy-glow: 270 70% 75%;
+    --dandy-face: 40 80% 95%;
+
+    /* Success / correct */
+    --success: 150 50% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* Income badge */
+    --income: 265 45% 40%;
+    --income-foreground: 265 30% 95%;
+  }
+
+  .dark {
+    --background: 260 30% 8%;
+    --foreground: 260 15% 90%;
+    --card: 260 25% 12%;
+    --card-foreground: 260 15% 90%;
+    --popover: 260 25% 12%;
+    --popover-foreground: 260 15% 90%;
+    --primary: 265 60% 65%;
+    --primary-foreground: 260 30% 8%;
+    --secondary: 260 20% 18%;
+    --secondary-foreground: 260 15% 85%;
+    --muted: 260 15% 20%;
+    --muted-foreground: 260 10% 60%;
+    --accent: 35 85% 55%;
+    --accent-foreground: 35 90% 95%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 260 15% 20%;
+    --input: 260 15% 20%;
+    --ring: 265 60% 65%;
+    --sidebar-background: 260 30% 8%;
+    --sidebar-foreground: 260 15% 90%;
+    --sidebar-primary: 265 60% 65%;
+    --sidebar-primary-foreground: 260 30% 8%;
+    --sidebar-accent: 260 20% 18%;
+    --sidebar-accent-foreground: 260 15% 85%;
+    --sidebar-border: 260 15% 20%;
+    --sidebar-ring: 265 60% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Nunito', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-button {
+    box-shadow: var(--shadow-button);
+  }
+
+  .glow-effect {
+    background: var(--gradient-glow);
+  }
+
+  /* Dandy speech bubble typing effect */
+  .dandy-typing {
+    background: linear-gradient(90deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: dandy-shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes dandy-shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+
+  /* Typing dots */
+  .dandy-dot {
+    @apply w-2 h-2 rounded-full bg-primary/60;
+    animation: dandy-bounce 1.2s ease-in-out infinite;
+  }
+  .dandy-dot-1 { animation-delay: 0s; }
+  .dandy-dot-2 { animation-delay: 0.2s; }
+  .dandy-dot-3 { animation-delay: 0.4s; }
+
+  @keyframes dandy-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+}
+
+/* Hide scrollbar completely to simulate native app experience */
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (min-width: 481px) {
+  body {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  #root {
+    width: 100vw;
+    max-width: 480px;
+    height: 100vh;
+    max-height: 900px;
+    background-color: var(--background);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    border-radius: 12px;
+  }
+}
+
