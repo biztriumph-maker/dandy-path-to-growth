@@ -75,41 +75,57 @@ const B6Scene1MatchingIntro = ({ t, onReady, onBack }: B6Scene1Props) => {
                 <p className="text-sm text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t("b6.s1.source.desc") }} />
               </motion.div>
 
-              {/* Key point 2 — proportion */}
+              {/* Conditions block */}
               <motion.div
-                className="p-4 rounded-2xl bg-gradient-to-r from-accent/15 to-primary/15 border border-accent/50 ring-2 ring-accent/30 shadow-card mb-4"
+                className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 shadow-card mb-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.4 }}
+              >
+                <p className="font-bold text-foreground mb-3 flex items-center gap-2">
+                  <span className="text-lg">⚠️</span>
+                  {t("b6.s3.conditions")}
+                </p>
+                <ul className="space-y-2.5 mb-3">
+                  <li className="flex gap-2 text-sm text-muted-foreground leading-relaxed">
+                    <span className="text-primary font-bold mt-0.5 shrink-0">•</span>
+                    <span dangerouslySetInnerHTML={{ __html: t("b6.s3.cond1") }} />
+                  </li>
+                  <li className="flex gap-2 text-sm text-muted-foreground leading-relaxed">
+                    <span className="text-primary font-bold mt-0.5 shrink-0">•</span>
+                    <span dangerouslySetInnerHTML={{ __html: t("b6.s3.cond2") }} />
+                  </li>
+                </ul>
+                <div className="p-3 rounded-xl bg-destructive/10 border border-destructive/30">
+                  <p className="text-sm text-destructive leading-relaxed" dangerouslySetInnerHTML={{ __html: t("b6.s3.cond3") }} />
+                </div>
+              </motion.div>
+
+              {/* Proportion + Example (combined) */}
+              <motion.div
+                className="p-4 rounded-2xl bg-gradient-to-r from-accent/15 to-primary/15 border border-accent/50 ring-2 ring-accent/30 shadow-card mb-5"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.4 }}
               >
                 <p className="font-bold text-foreground mb-2 flex items-center gap-2">
                   <span className="text-lg">📊</span>
                   {t("b6.s1.proportion.title")}
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t("b6.s1.proportion.desc") }} />
-              </motion.div>
-
-              {/* Example */}
-              <motion.div
-                className="p-4 rounded-2xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 shadow-card mb-5"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.4 }}
-              >
-                <p className="font-bold text-foreground mb-2 flex items-center gap-2">
-                  <span className="text-lg">📝</span>
-                  {t("b6.s1.example.title")}
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {t("b6.s1.example.desc")}
-                </p>
+                <div className="mt-3 p-3 rounded-xl bg-green-500/10 border border-green-500/30">
+                  <p className="text-sm text-foreground leading-relaxed flex items-center gap-2">
+                    <span className="shrink-0">📝</span>
+                    <span><strong>{t("b6.s1.example.title")}:</strong> {t("b6.s1.example.desc")}</span>
+                  </p>
+                </div>
               </motion.div>
 
               {/* Dandy bottom */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.0 }}
+                transition={{ delay: 1.2 }}
               >
                 <DandySpeechBubble text={t("b6.s1.dandy.bottom")} />
               </motion.div>

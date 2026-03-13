@@ -26,6 +26,23 @@ const packagesData = [
   { key: "vip",     label: "VIP",     pct: 8,  limit: 8000 },
 ];
 
+const statusesData = [
+  { key: "manager",  label: "Менеджер" },
+  { key: "mentor",   label: "Наставник" },
+  { key: "master",   label: "Мастер" },
+  { key: "advisor",  label: "Советник" },
+  { key: "director", label: "Директор +" },
+];
+
+/** Effective binary % depends on package + status */
+function getEffectivePct(pkgKey: string, statusKey: string): number {
+  if (pkgKey === "client") return 0;
+  if (pkgKey === "partner" || pkgKey === "business") return 6;
+  // elite / vip
+  if (statusKey === "director") return 8;
+  return 10; // manager, mentor, master, advisor
+}
+
 const limitsInfo = [
   { pkg: "client",  cap: 0 },
   { pkg: "partner", cap: 500 },
@@ -55,6 +72,7 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
   const [showContent, setShowContent] = useState(false);
   const [currency, setCurrency] = useState(0);
   const [selectedPkg, setSelectedPkg] = useState(0);
+  const [selectedStatus, setSelectedStatus] = useState(0);
   const [justClicked, setJustClicked] = useState<string | null>(null);
   const clickTimer = useRef<ReturnType<typeof setTimeout>>();
 
@@ -76,13 +94,15 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
   /* ─── производные ─── */
   const cur = currencies[currency];
   const pkg = packagesData[selectedPkg];
+  const status = statusesData[selectedStatus];
+  const effectivePct = getEffectivePct(pkg.key, status.key);
 
   const lp = clampInt(leftPartners);
   const rp = clampInt(rightPartners);
   const L  = clampInt(leftPV);
   const R  = clampInt(rightPV);
 
-  const isClientPkg = pkg.pct === 0;
+  const isClientPkg = effectivePct === 0;
   const activationOk = lp >= 1 && rp >= 2;
   const binaryActive = activationOk && !isClientPkg;
 
@@ -106,7 +126,7 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
   }
 
   /* ─── расчёт денег ─── */
-  const rawAccruedPV    = pvPayable * (pkg.pct / 100);
+  const rawAccruedPV    = pvPayable * (effectivePct / 100);
   const cappedAccruedPV = binaryActive ? Math.min(rawAccruedPV, pkg.limit) : 0;
   const pvOverLimit     = binaryActive ? Math.max(0, rawAccruedPV - pkg.limit) : 0;
 
@@ -246,11 +266,39 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
           </p>
         </motion.div>
 
-        {/* ════ БЛОК 2 — Пакет ════ */}
+        {/* ════ БЛОК 2 — Статус ════ */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
+        >
+          <p className="text-sm font-bold text-foreground mb-2">
+            {t("b4.s2.chooseStatus")}
+          </p>
+          <div className="grid grid-cols-5 gap-1">
+            {statusesData.map((s, i) => (
+              <motion.button
+                key={s.key}
+                className={`py-2 rounded-xl text-[11px] font-bold border-2 transition-all ${
+                  selectedStatus === i
+                    ? `border-primary bg-primary/10 text-primary${justClicked === `st-${i}` ? ' ring-2 ring-primary/50' : ''}`
+                    : "border-border bg-card text-foreground hover:border-primary/40"
+                }`}
+                whileHover={selectedStatus !== i ? { scale: 1.05, y: -2 } : {}}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleClick(`st-${i}`, () => setSelectedStatus(i))}
+              >
+                <div className="leading-tight">{t(`b4.s2.status.${s.key}`)}</div>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ════ БЛОК 2.5 — Пакет ════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.22 }}
         >
           <p className="text-sm font-bold text-foreground mb-2">
             {t("b4.s2.choosePackage")}
@@ -270,7 +318,7 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
               >
                 <div className="leading-tight"><HighlightVip text={t(`b4.s2.pkg.${p.key}`)} /></div>
                 <div className="text-[15px] font-black mt-0.5">
-                  {p.pct}%
+                  {getEffectivePct(p.key, statusesData[selectedStatus].key)}%
                 </div>
               </motion.button>
             ))}
@@ -279,7 +327,7 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
           {/* индикатор пакета */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={selectedPkg}
+              key={`${selectedPkg}-${selectedStatus}`}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -290,7 +338,7 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
                   ? "bg-destructive/10 border-destructive/30 text-destructive/80" 
                   : "bg-primary/15 border-primary/30 text-primary"
               }`}>
-                {t("b4.s2.binaryPct")}: <strong className={`ml-1.5 text-base font-black ${isClientPkg ? "text-destructive" : ""}`}>{pkg.pct}%</strong>
+                {t("b4.s2.binaryPct")}: <strong className={`ml-1.5 text-base font-black ${isClientPkg ? "text-destructive" : ""}`}>{effectivePct}%</strong>
               </span>
               <span className={`inline-flex items-center px-3 py-1.5 rounded-full border text-[13px] font-medium transition-colors ${
                 isClientPkg 
@@ -556,7 +604,7 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
           <div className="border-t border-primary/15 pt-2 mt-1 space-y-1.5">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">{t("b4.s2.pctLabel")}</span>
-              <span className="font-bold text-foreground">{pkg.pct}%</span>
+              <span className="font-bold text-foreground">{effectivePct}%</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">{t("b4.s2.accruedPV")}</span>
@@ -626,7 +674,7 @@ const B4Scene2Calculator = ({ t, onReady, onBack }: B4Scene2Props) => {
 
           {/* мини-сводка */}
           <div className="mt-3 pt-3 border-t border-primary/10 space-y-1 text-xs text-muted-foreground">
-            <p>{t("b4.s2.summaryPkg")}: {t(`b4.s2.pkg.${pkg.key}`)} ({pkg.pct}%)</p>
+            <p>{t("b4.s2.summaryPkg")}: {t(`b4.s2.pkg.${pkg.key}`)} ({effectivePct}%)</p>
             <p>{t("b4.s2.summaryLimit")}: {pkg.limit.toLocaleString("ru-RU")} PV</p>
             <p>
               {t("b4.s2.summaryBranches")} = {L} PV / {t("b4.s2.summaryBranchR")} = {R} PV

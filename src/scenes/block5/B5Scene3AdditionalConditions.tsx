@@ -192,6 +192,21 @@ const B5Scene3AdditionalConditions = ({ t, onReady, onBack }: B5Scene3Props) => 
                         <p className="text-[11px] text-muted-foreground mt-1.5 leading-snug"
                           dangerouslySetInnerHTML={{ __html: t(`b5.s3.${key}.desc`) }}
                         />
+                        {/* Second condition with "or" divider */}
+                        {key !== "d" && (
+                          <>
+                            <div className="flex items-center gap-2 my-1.5">
+                              <div className="flex-1 h-px bg-primary/30" />
+                              <span className="text-[10px] font-bold text-primary uppercase tracking-wider px-1">
+                                {t("b5.s3.or")}
+                              </span>
+                              <div className="flex-1 h-px bg-primary/30" />
+                            </div>
+                            <p className="text-[11px] text-muted-foreground leading-snug"
+                              dangerouslySetInnerHTML={{ __html: t(`b5.s3.${key}.desc2`) }}
+                            />
+                          </>
+                        )}
                       </div>
                     </div>
 
@@ -211,18 +226,6 @@ const B5Scene3AdditionalConditions = ({ t, onReady, onBack }: B5Scene3Props) => 
                   </motion.div>
                 ))}
               </div>
-
-              {/* Footer warning */}
-              <motion.div
-                className="p-3 rounded-2xl bg-destructive/10 border border-destructive/30 mb-5"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
-              >
-                <p className="text-xs text-center font-medium text-destructive leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: t("b5.s3.footer").replace(/(20%.+)$/, '<span style="white-space:nowrap"><strong class="font-extrabold text-sm">$1</strong></span>') }}
-                />
-              </motion.div>
             </motion.div>
           ) : null}
         </AnimatePresence>

@@ -175,27 +175,79 @@ const B4Scene1Binary = ({ t, onReady, onBack, onStepChange, initialStep = 1 }: B
         <AnimatePresence>
           {step === 1 && (
             <motion.div
-              className="p-4 rounded-2xl bg-gradient-to-r from-blue-500/20 to-indigo-500/10 border border-border shadow-card origin-top"
+              className="rounded-2xl bg-gradient-to-r from-blue-500/20 to-indigo-500/10 border border-border shadow-card origin-top overflow-hidden"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0, padding: 0, margin: 0, overflow: "hidden" }}
               transition={{ duration: 0.4 }}
             >
-              <div className="flex items-start gap-4">
-                <span className="text-3xl mt-1 shrink-0">🔗</span>
+              {/* Header */}
+              <div className="flex items-start gap-3 p-4 pb-2">
+                <span className="text-2xl mt-0.5 shrink-0">🔗</span>
                 <div className="flex-1">
                   <p className="font-black text-foreground text-lg tracking-wide">{t("b3.s1.bonus2.title")}</p>
-                  <p className="text-base font-medium text-foreground mt-2 whitespace-pre-line leading-relaxed">
+                  <p className="text-base font-medium text-foreground mt-1 whitespace-pre-line leading-relaxed">
                     {t("b3.s1.bonus2.desc").split(/(\d+%)/).map((part: string, j: number) => {
-                      if (part === "6%") {
+                      if (/\d+%/.test(part)) {
                         return <span key={j} className="font-bold text-xl text-primary">{part}</span>;
-                      }
-                      if (part === "8%") {
-                        return <span key={j} className="font-black text-3xl text-primary">{part}</span>;
                       }
                       return <span key={j} className="text-muted-foreground">{part}</span>;
                     })}
                   </p>
+                </div>
+              </div>
+
+              {/* Description rows */}
+              <div className="px-4 pb-3 space-y-2">
+                {/* Row 1: Client */}
+                <div className="grid grid-cols-2 gap-3 rounded-xl bg-background/60 p-2.5">
+                  <p className="text-xs font-bold text-foreground">
+                    {t("b4.s1.bonusDesc.client").split(/(\u00ab[^»]+\u00bb)/).map((part: string, j: number) =>
+                      /\u00ab/.test(part) ? <span key={j} className="font-extrabold text-primary">{part}</span> : part
+                    )}
+                  </p>
+                  <p className="text-xs font-semibold text-destructive">{t("b4.s1.bonusDesc.clientResult")}</p>
+                </div>
+                {/* Row 2: Partner / Business */}
+                <div className="grid grid-cols-2 gap-3 rounded-xl bg-background/60 p-2.5">
+                  <p className="text-xs font-bold text-foreground">
+                    {t("b4.s1.bonusDesc.partnerBiz").split(/(\u00ab[^»]+\u00bb)/).map((part: string, j: number) =>
+                      /\u00ab/.test(part) ? <span key={j} className="font-extrabold text-primary">{part}</span> : part
+                    )}
+                  </p>
+                  <div className="space-y-0.5">
+                    <p className="text-xs font-semibold text-foreground">
+                      {t("b4.s1.bonusDesc.partnerBizResult").split(/(\d+%)/).map((part: string, j: number) =>
+                        /\d+%/.test(part) ? <span key={j} className="font-extrabold text-sm text-primary">{part}</span> : part
+                      )}
+                    </p>
+                    <p className="text-xs font-semibold text-muted-foreground">{t("b4.s1.bonusDesc.partnerBizResult2")}</p>
+                  </div>
+                </div>
+                {/* Row 3: Elite / VIP */}
+                <div className="grid grid-cols-2 gap-3 rounded-xl bg-background/60 p-2.5">
+                  <p className="text-xs font-bold text-foreground">
+                    {t("b4.s1.bonusDesc.eliteVip").split(/(\u00ab[^»]+\u00bb)/).map((part: string, j: number) =>
+                      /\u00ab/.test(part) ? <span key={j} className="font-extrabold text-primary">{part}</span> : part
+                    )}
+                  </p>
+                  <div className="space-y-0.5">
+                    <p className="text-xs font-semibold text-foreground">
+                      {t("b4.s1.bonusDesc.eliteVipResult1").split(/(\d+%|[\u0421С]\u043e\u0432\u0435\u0442\u043d\u0438\u043a|\u041a\u0435\u04a3\u0435\u0441\u0448\u0456|Advisor|Maslahatchi|\u0420\u0430\u0434\u043d\u0438\u043a)/).map((part: string, j: number) => {
+                        if (/\d+%/.test(part)) return <span key={j} className="font-extrabold text-sm text-primary">{part}</span>;
+                        if (/\u0421\u043e\u0432\u0435\u0442\u043d\u0438\u043a|\u041a\u0435\u04a3\u0435\u0441\u0448\u0456|Advisor|Maslahatchi|\u0420\u0430\u0434\u043d\u0438\u043a/i.test(part)) return <span key={j} className="font-extrabold text-primary">{part}</span>;
+                        return part;
+                      })}
+                    </p>
+                    <p className="text-xs font-semibold text-foreground">
+                      {t("b4.s1.bonusDesc.eliteVipResult2").split(/(\d+%|Директор и выше|Директор жəне жоғары|Direktor va undan yuqori|Директор і вище|Director and above)/).map((part: string, j: number) => {
+                        if (/\d+%/.test(part)) return <span key={j} className="font-extrabold text-sm text-primary">{part}</span>;
+                        if (/Директор|Director|Direktor/i.test(part)) return <span key={j} className="font-extrabold text-primary">{part}</span>;
+                        return part;
+                      })}
+                    </p>
+                    <p className="text-xs font-semibold text-muted-foreground">{t("b4.s1.bonusDesc.eliteVipResult3")}</p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -275,8 +327,7 @@ const B4Scene1Binary = ({ t, onReady, onBack, onStepChange, initialStep = 1 }: B
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 16 }}
                   >
-                    <PointerIcon />
-                    <span className="text-sm font-bold text-primary">
+                    <span className="text-sm font-bold text-primary whitespace-nowrap">
                       {t("b4.s1.placing")} {distributedCount + 1} →{" "}
                       <span className={
                         DISTRIBUTION_ORDER[distributedCount] === "left"
@@ -320,7 +371,7 @@ const B4Scene1Binary = ({ t, onReady, onBack, onStepChange, initialStep = 1 }: B
                         transition={{ delay: 0.6 }}
                       >
                         <span
-                          className="text-xs font-bold px-2.5 py-1 rounded-full"
+                          className="text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap"
                           style={{
                             backgroundColor: "hsla(200, 55%, 50%, 0.12)",
                             color: "hsl(200, 55%, 45%)",
@@ -336,7 +387,7 @@ const B4Scene1Binary = ({ t, onReady, onBack, onStepChange, initialStep = 1 }: B
                         transition={{ delay: 0.6 }}
                       >
                         <span
-                          className="text-xs font-bold px-2.5 py-1 rounded-full"
+                          className="text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap"
                           style={{
                             backgroundColor: "hsla(25, 55%, 50%, 0.12)",
                             color: "hsl(25, 55%, 45%)",

@@ -152,6 +152,9 @@ const B6Scene3MatchingDetails = ({ t, onReady, onBack }: B6Scene3Props) => {
                     <span dangerouslySetInnerHTML={{ __html: t("b6.s3.cond2") }} />
                   </li>
                 </ul>
+                <div className="mt-2.5 p-2.5 rounded-xl bg-destructive/10 border border-destructive/30">
+                  <p className="text-xs text-destructive leading-relaxed" dangerouslySetInnerHTML={{ __html: t("b6.s3.cond3") }} />
+                </div>
               </motion.div>
 
               {/* Result */}

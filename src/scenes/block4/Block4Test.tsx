@@ -26,7 +26,7 @@ function shuffle<T>(arr: T[]): T[] {
 const TOTAL_QUESTIONS = 5;
 
 // ─── Task 2 variants ───
-type Task2Variant = "A" | "B";
+type Task2Variant = "A" | "B" | "C";
 
 // ─── Task 3 variants ───
 interface Task3Config {
@@ -94,7 +94,10 @@ const Block4Test = ({ t, onComplete, onBack }: Block4TestProps) => {
 
   // ─── Q2 state ───
   const [q2Variant] = useState<Task2Variant>(
-    () => (Math.random() > 0.5 ? "A" : "B") as Task2Variant
+    () => {
+      const r = Math.random();
+      return r < 1 / 3 ? "A" : r < 2 / 3 ? "B" : "C";
+    }
   );
   const [q2Options] = useState(() => shuffle(["4", "6", "8", "10"]));
   const [q2Selected, setQ2Selected] = useState<string | null>(null);
@@ -163,7 +166,7 @@ const Block4Test = ({ t, onComplete, onBack }: Block4TestProps) => {
   const handleQ2 = (val: string) => {
     if (showSuccess || showHint) return;
     setQ2Selected(val);
-    const correctAnswer = q2Variant === "A" ? "6" : "8";
+    const correctAnswer = q2Variant === "A" ? "6" : q2Variant === "B" ? "10" : "8";
     if (val === correctAnswer) {
       handleCorrectAnswer();
     } else {
@@ -655,9 +658,9 @@ function Question2({
   onSelect: (v: string) => void;
   showSuccess: boolean;
 }) {
-  const correctAnswer = variant === "A" ? "6" : "8";
+  const correctAnswer = variant === "A" ? "6" : variant === "B" ? "10" : "8";
   const titleKey =
-    variant === "A" ? "b4test.q2.titleA" : "b4test.q2.titleB";
+    variant === "A" ? "b4test.q2.titleA" : variant === "B" ? "b4test.q2.titleB" : "b4test.q2.titleC";
 
   return (
     <div>
